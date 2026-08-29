@@ -1,0 +1,695 @@
+/* Google Fonts Import: Inter & JetBrains Mono for Code/IDs */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --sentinelcore-bg-dark: #111318;
+  --sentinelcore-bg-panel: #1b1e24;
+  --sentinelcore-bg-card: #22262f;
+  --sentinelcore-border: #2e3440;
+  --sentinelcore-green: #52c41a;
+  --sentinelcore-blue: #1890ff;
+  --sentinelcore-orange: #fa8c16;
+  --sentinelcore-red: #f5222d;
+  --sentinelcore-purple: #722ed1;
+  --sentinelcore-text-bright: #ffffff;
+  --sentinelcore-text-main: #f0f2f5; /* Increased contrast */
+  --sentinelcore-text-muted: #a0aec0; /* Significantly brighter muted text */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--sentinelcore-bg-dark);
+  color: var(--sentinelcore-text-main);
+  min-height: 100vh;          /* CHANGED: min-height instead of height */
+  overflow-y: auto;           /* CHANGED: allow vertical scroll */
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App Shell Layout */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* This correctly locks scroll ONLY inside the dashboard view */
+}
+
+.main-content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: var(--sentinelcore-bg-dark);
+}
+
+.page-container {
+  padding: 28px 32px;
+}
+
+/* Header Navbar */
+.top-navbar {
+  height: 70px; /* Increased height so it's prominent */
+  min-height: 70px;
+  flex-shrink: 0; /* Prevents the navbar from shrinking when page content grows */
+  background-color: var(--sentinelcore-bg-panel);
+  border-bottom: 1px solid var(--sentinelcore-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  width: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.35rem; /* Larger brand title */
+  font-weight: 800;
+  color: var(--sentinelcore-green);
+  letter-spacing: -0.02em;
+}
+
+.user-profile-btn {
+  width: 44px; /* Larger profile avatar icon */
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--sentinelcore-blue);
+  color: var(--sentinelcore-text-bright);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.user-profile-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 65px;
+  right: 28px;
+  width: 240px;
+  background: var(--sentinelcore-bg-card);
+  border: 1px solid var(--sentinelcore-border);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 12px;
+}
+
+.dropdown-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--sentinelcore-border);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.dropdown-item-btn {
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  color: var(--sentinelcore-red);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dropdown-item-btn:hover {
+  background: var(--sentinelcore-bg-panel);
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  width: 250px; /* Slightly wider sidebar */
+  background-color: var(--sentinelcore-bg-panel);
+  border-right: 1px solid var(--sentinelcore-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  color: var(--sentinelcore-text-muted);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  background-color: var(--sentinelcore-bg-card);
+  color: var(--sentinelcore-text-bright);
+  border-left-color: var(--sentinelcore-green);
+  font-weight: 600;
+}
+
+/* Dashboard Metric Cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background-color: var(--sentinelcore-bg-panel);
+  border: 1px solid var(--sentinelcore-border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.stat-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--sentinelcore-text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-top: 10px;
+  color: var(--sentinelcore-text-bright);
+}
+
+/* Chart Row Panels */
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.chart-panel {
+  background-color: var(--sentinelcore-bg-panel);
+  border: 1px solid var(--sentinelcore-border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.chart-panel h4 {
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sentinelcore-text-bright);
+}
+
+/* Data Tables */
+.table-panel {
+  background-color: var(--sentinelcore-bg-panel);
+  border: 1px solid var(--sentinelcore-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 1.0 rem; /* Larger table text */
+}
+
+.custom-table th {
+  background-color: var(--sentinelcore-bg-card);
+  color: var(--sentinelcore-text-muted);
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--sentinelcore-border);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.custom-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--sentinelcore-border);
+  color: var(--sentinelcore-text-main);
+  line-height: 1.5;
+}
+
+.custom-table td[style*="monospace"], .custom-table td[style*="fontFamily: 'monospace'"] {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.custom-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Larger Login/Sign-Up Form Box & Inputs */
+.form-panel {
+  background-color: var(--sentinelcore-bg-panel);
+  border: 1px solid var(--sentinelcore-border);
+  border-radius: 12px;
+  padding: 32px 36px; /* Increased padding */
+  margin-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-size: 1.0 rem; /* Increased label font size */
+  font-weight: 600;
+  color: var(--sentinelcore-text-muted);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  background-color: var(--sentinelcore-bg-dark);
+  border: 1.5px solid var(--sentinelcore-border);
+  border-radius: 6px;
+  color: var(--sentinelcore-text-bright);
+  padding: 12px 16px; /* Comfortably larger input padding */
+  font-size: 0.95rem; /* Larger font inside inputs */
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-input:focus {
+  border-color: var(--sentinelcore-blue);
+}
+
+.form-input.is-invalid {
+  border-color: var(--sentinelcore-red) !important;
+}
+
+.field-error-msg {
+  color: var(--sentinelcore-red);
+  font-size: 0.85rem; /* Larger error text */
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Button Upgrades */
+.btn-primary {
+  background-color: var(--sentinelcore-green);
+  color: #fff;
+  border: none;
+  padding: 12px 20px; /* Larger button hit area */
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-action {
+  background-color: var(--sentinelcore-blue);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Status Badges */
+.badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badge-healthy { background: rgba(82, 196, 26, 0.2); color: #73d13d; }
+.badge-warning { background: rgba(250, 140, 22, 0.2); color: #ffc069; }
+.badge-critical { background: rgba(245, 34, 45, 0.2); color: #ff7875; }
+
+/* Loader Spinner */
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.soc-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--sentinelcore-border);
+  border-top-color: var(--sentinelcore-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   GLASSMORPHISM BUTTON STYLES (GLOBAL)
+   ========================================================= */
+
+/* Base Glassmorphic Button Styling */
+button,
+.btn-primary,
+.btn-action,
+.user-profile-btn,
+.dropdown-item-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--sentinelcore-text-bright) !important;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+}
+
+/* Base Hover Glow Effect */
+button:hover,
+.btn-primary:hover,
+.btn-action:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Active Click State */
+button:active,
+.btn-primary:active,
+.btn-action:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   VARIANT SPECIFIC GLASS STYLES
+   ========================================================= */
+
+/* Primary Green Glass Buttons (Register, Save, Main CTAs) */
+.btn-primary,
+button[type="submit"] {
+  background: rgba(82, 196, 26, 0.18) !important;
+  border-color: rgba(82, 196, 26, 0.4) !important;
+  color: #73d13d !important;
+  text-shadow: 0 0 8px rgba(82, 196, 26, 0.3);
+}
+
+.btn-primary:hover,
+button[type="submit"]:hover {
+  background: rgba(82, 196, 26, 0.32) !important;
+  border-color: rgba(82, 196, 26, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(82, 196, 26, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* Action Blue Glass Buttons (View, Assign, Info) */
+.btn-action,
+button[style*="1890ff"],
+button[style*="var(--sentinelcore-blue)"] {
+  background: rgba(24, 144, 255, 0.18) !important;
+  border-color: rgba(24, 144, 255, 0.4) !important;
+  color: #40a9ff !important;
+}
+
+.btn-action:hover,
+button[style*="1890ff"]:hover,
+button[style*="var(--sentinelcore-blue)"]:hover {
+  background: rgba(24, 144, 255, 0.32) !important;
+  border-color: rgba(24, 144, 255, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* Orange Glass Buttons (Edit, Investigate) */
+button[style*="fa8c16"],
+button[style*="var(--sentinelcore-orange)"] {
+  background: rgba(250, 140, 22, 0.18) !important;
+  border-color: rgba(250, 140, 22, 0.4) !important;
+  color: #ffc069 !important;
+}
+
+button[style*="fa8c16"]:hover,
+button[style*="var(--sentinelcore-orange)"]:hover {
+  background: rgba(250, 140, 22, 0.32) !important;
+  border-color: rgba(250, 140, 22, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(250, 140, 22, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* Red Glass Buttons (Delete, Cancel) */
+button[style*="f5222d"],
+button[style*="var(--sentinelcore-red)"] {
+  background: rgba(245, 34, 45, 0.18) !important;
+  border-color: rgba(245, 34, 45, 0.4) !important;
+  color: #ff7875 !important;
+}
+
+button[style*="f5222d"]:hover,
+button[style*="var(--sentinelcore-red)"]:hover {
+  background: rgba(245, 34, 45, 0.32) !important;
+  border-color: rgba(245, 34, 45, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(245, 34, 45, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* Purple Glass Buttons (History, Toggle drawers) */
+button[style*="722ed1"],
+button[style*="var(--sentinelcore-purple)"] {
+  background: rgba(114, 46, 209, 0.2) !important;
+  border-color: rgba(114, 46, 209, 0.45) !important;
+  color: #b37feb !important;
+}
+
+button[style*="722ed1"]:hover,
+button[style*="var(--sentinelcore-purple)"]:hover {
+  background: rgba(114, 46, 209, 0.35) !important;
+  border-color: rgba(114, 46, 209, 0.7) !important;
+  box-shadow: 0 6px 20px rgba(114, 46, 209, 0.35), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* Circular User Profile Avatar Glass Button */
+.user-profile-btn {
+  background: rgba(24, 144, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.user-profile-btn:hover {
+  background: rgba(24, 144, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(24, 144, 255, 0.5);
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   FIXED GLASS BUTTON STYLES (SPECIFIC COLORS)
+   ========================================================= */
+
+/* Base Glassmorphic Button Rules */
+.btn-glass,
+button {
+  position: relative;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease !important;
+}
+
+/* 🔵 Blue Glass (Assign / View / Primary Actions) */
+.btn-blue,
+.btn-assign {
+  background: rgba(24, 144, 255, 0.18) !important;
+  border: 1px solid rgba(24, 144, 255, 0.4) !important;
+  color: #40a9ff !important;
+}
+
+.btn-blue:hover,
+.btn-assign:hover {
+  background: rgba(24, 144, 255, 0.35) !important;
+  border-color: rgba(24, 144, 255, 0.7) !important;
+  box-shadow: 0 0 15px rgba(24, 144, 255, 0.4);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* 🟠 Orange Glass (Investigate / Edit / Warnings) */
+.btn-orange,
+.btn-investigate {
+  background: rgba(250, 140, 22, 0.18) !important;
+  border: 1px solid rgba(250, 140, 22, 0.4) !important;
+  color: #ffc069 !important;
+}
+
+.btn-orange:hover,
+.btn-investigate:hover {
+  background: rgba(250, 140, 22, 0.35) !important;
+  border-color: rgba(250, 140, 22, 0.7) !important;
+  box-shadow: 0 0 15px rgba(250, 140, 22, 0.4);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* 🟢 Green Glass (Resolve / Submit / Success) */
+.btn-green,
+.btn-resolve {
+  background: rgba(82, 196, 26, 0.18) !important;
+  border: 1px solid rgba(82, 196, 26, 0.4) !important;
+  color: #73d13d !important;
+}
+
+.btn-green:hover,
+.btn-resolve:hover {
+  background: rgba(82, 196, 26, 0.35) !important;
+  border-color: rgba(82, 196, 26, 0.7) !important;
+  box-shadow: 0 0 15px rgba(82, 196, 26, 0.4);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* 🔴 Red Glass (Delete / Cancel / Critical) */
+.btn-red {
+  background: rgba(245, 34, 45, 0.18) !important;
+  border: 1px solid rgba(245, 34, 45, 0.4) !important;
+  color: #ff7875 !important;
+}
+
+.btn-red:hover {
+  background: rgba(245, 34, 45, 0.35) !important;
+  border-color: rgba(245, 34, 45, 0.7) !important;
+  box-shadow: 0 0 15px rgba(245, 34, 45, 0.4);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+/* =========================================================
+   ENHANCED & LARGER TABLE ITEMS (GLOBAL)
+   ========================================================= */
+
+/* Table Font & Padding Upgrades */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 1.05rem !important; /* Increased cell text size (from 0.95rem) */
+}
+
+.custom-table th {
+  background-color: var(--sentinelcore-bg-card);
+  color: var(--sentinelcore-text-muted);
+  padding: 18px 22px !important; /* Generous padding for headers */
+  border-bottom: 2px solid var(--sentinelcore-border);
+  font-weight: 700;
+  font-size: 0.9rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.custom-table td {
+  padding: 20px 22px !important; /* Larger row height for better clickability */
+  border-bottom: 1px solid var(--sentinelcore-border);
+  color: var(--sentinelcore-text-main);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Asset UUID Styling */
+.custom-table td[style*="monospace"],
+.custom-table td[style*="fontFamily: 'monospace'"] {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.95rem !important; /* Makes UUIDs clear and legible */
+  color: #d1d5db;
+}
+
+/* Table Row Hover Highlight */
+.custom-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* =========================================================
+   LARGER BADGES & GLASS ACTION BUTTONS
+   ========================================================= */
+
+/* Larger Status Badges */
+.badge {
+  padding: 6px 14px !important; /* Increased badge size */
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/* Larger Action Glass Buttons (View, Edit, Delete) */
+.btn-action,
+.custom-table .btn-glass {
+  padding: 8px 16px !important; /* Increased hit area for action buttons */
+  font-size: 0.9rem !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+}
+
+/* Larger Input Filters */
+.table-panel input.form-input {
+  padding: 10px 16px !important;
+  font-size: 0.95rem !important;
+  border-radius: 6px !important;
+}
