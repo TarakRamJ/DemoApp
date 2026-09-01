@@ -170,10 +170,9 @@ public class InfrastructureMonitoringService {
             alertRepository.delete(alerts.get(0));
         }
     }
-    @Scheduled(fixedRate = 10000) // Runs every 10 seconds
+    @Scheduled(fixedRate = 10000) //
     @Transactional
     public void monitorAssetConnectivity() {
-        // Threshold: If no data in the last 15 seconds, consider it offline
         OffsetDateTime thresholdTime = OffsetDateTime.now().minusSeconds(15);
 
         List<Asset> allAssets = assetRepository.findAll();
