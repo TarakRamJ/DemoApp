@@ -19,6 +19,7 @@ public class TelemetryIngestionController {
     @PostMapping("/ingest")
     public ResponseEntity<Void> ingestTelemetry(@RequestBody PerformanceMetric metric) {
         // Receives JSON payload from the Agent and passes it to your engine
+//        System.out.println("Got");
         monitoringService.processRealTelemetry(metric);
         return ResponseEntity.ok().build();
     }
