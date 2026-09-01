@@ -170,4 +170,32 @@ public class InfrastructureMonitoringService {
             alertRepository.delete(alerts.get(0));
         }
     }
+    @Scheduled(fixedRate = 10000) // Runs every 10 seconds
+    @Transactional
+    public void monitorAssetConnectivity() {
+        // Threshold: If no data in the last 15 seconds, consider it offline
+        OffsetDateTime thresholdTime = OffsetDateTime.now().minusSeconds(15);
+
+        List<Asset> allAssets = assetRepository.findAll();
+
+        for (Asset asset : allAssets) {
+            Optional<PerformanceMetric> metricOpt = metricRepository.findByAssetId(asset.getAssetId());
+
+            if (metricOpt.isPresent()) {
+                PerformanceMetric lastMetric = metricOpt.get();
+
+                // If the last metric is older than our threshold AND the asset isn't already OFFLINE
+                if (lastMetric.getTimestamp().isBefore(thresholdTime) && asset.getStatus() != Asset.HealthStatus.OFFLINE) {
+
+                    System.out.println("Asset disconnected: " + asset.getName());
+                    asset.setStatus(Asset.HealthStatus.OFFLINE);
+                    asset.setUpdatedAt(OffsetDateTime.now());
+                    assetRepository.save(asset);
+
+                    // Optional: Trigger an alert that the server went offline
+                    triggerAlertIfNew(asset, "Connectivity", 100.0f, Alert.AlertSeverity.CRITICAL);
+                }
+            }
+        }
+    }
 }

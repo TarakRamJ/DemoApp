@@ -37,7 +37,7 @@ public class Asset {
     private OffsetDateTime updatedAt;
 
     public enum AssetType { SERVER, CLOUD_AWS, CLOUD_AZURE, K8S_POD }
-    public enum HealthStatus { HEALTHY, WARNING, CRITICAL }
+    public enum HealthStatus { HEALTHY, WARNING, CRITICAL, OFFLINE }
 
     public Asset() {}
 
