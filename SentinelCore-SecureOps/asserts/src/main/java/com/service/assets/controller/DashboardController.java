@@ -30,6 +30,11 @@ public class DashboardController {
         return ResponseEntity.ok(dashboardService.getSystemHealth());
     }
 
+    @GetMapping("/performance-metrics")
+    public ResponseEntity<PerformanceMetricsDTO> getPerformanceMetrics() {
+        return ResponseEntity.ok(dashboardService.getPerformanceMetrics());
+    }
+
     @GetMapping("/recent-alerts")
     public ResponseEntity<List<AlertResponseDTO>> getRecentAlerts() {
         return ResponseEntity.ok(dashboardService.getRecentAlerts());

@@ -61,4 +61,31 @@ public class Alert {
     public void setServerName(String serverName) { this.serverName = serverName; }
     public AlertSeverity getSeverity() { return severity; }
 
+    public void setAlertId(UUID alertId) {
+        this.alertId = alertId;
+    }
+
+    public void setAssetId(UUID assetId) {
+        this.assetId = assetId;
+    }
+
+    public void setMetricName(String metricName) {
+        this.metricName = metricName;
+    }
+
+    public void setViolationValue(float violationValue) {
+        this.violationValue = violationValue;
+    }
+
+    public void setSeverity(AlertSeverity severity) {
+        this.severity = severity;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
